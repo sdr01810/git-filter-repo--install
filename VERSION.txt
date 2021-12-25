@@ -1,0 +1,3 @@
+2.34.0+sdr01810-1.0.0-alpha.1
+
+#^-- undecorated version corresponds to the submodule git-filter-repo

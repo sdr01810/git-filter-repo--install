@@ -1,0 +1,24 @@
+case "::${PATH}::" in
+*:"@package_installation_dir_unversioned@/bin":*)
+	;;
+*)
+	export PATH="${PATH}${PATH:+:}@package_installation_dir_unversioned@/bin"
+	;;
+esac
+
+case "::${MANPATH}::" in
+*:"@package_installation_dir_unversioned@/share/man":*)
+	;;
+*)
+	export MANPATH="${MANPATH}${MANPATH:+:}@package_installation_dir_unversioned@/share/man"
+	;;
+esac
+
+case "::${PYTHONPATH}::" in
+*:"@package_installation_dir_unversioned@/lib/python3/site-packages":*)
+	;;
+*)
+	export PYTHONPATH="${PYTHONPATH}${PYTHONPATH:+:}@package_installation_dir_unversioned@/lib/python3/site-packages"
+	;;
+esac
+

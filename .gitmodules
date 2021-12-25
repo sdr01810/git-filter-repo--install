@@ -1,0 +1,4 @@
+[submodule "external/git-filter-repo"]
+	path = external/git-filter-repo
+	url = https://github.com/newren/git-filter-repo.git
+	branch = v2.34.0

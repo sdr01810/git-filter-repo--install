@@ -1,0 +1,41 @@
+git_filter_repo_installation_dir = ${installation_dir}
+
+git_filter_repo_installation_bin_dir = ${git_filter_repo_installation_dir}/bin
+
+git_filter_repo_installation_man_dir = ${git_filter_repo_installation_dir}/share/man
+
+git_filter_repo_installation_html_dir = ${git_filter_repo_installation_dir}/share/doc/git-filter-repo
+
+git_filter_repo_installation_python_dir = ${git_filter_repo_installation_dir}/lib/python3/site-packages
+
+##
+
+stage :: ${distribution_staging_dir}/.ts.completed.git-filter-repo
+
+${distribution_staging_dir}/.ts.completed.git-filter-repo : ${distribution_staging_dir}/.ts.completed
+	:
+	git submodule update --checkout --recursive
+	@:
+	@$(call touch_file,$@)
+
+##
+
+install :: $(installation_dir)/.ts.completed.git-filter-repo
+
+$(installation_dir)/.ts.completed.git-filter-repo : $(installation_dir)/.ts.completed
+	:
+	mkdir -p "${git_filter_repo_installation_bin_dir}"
+	mkdir -p "${git_filter_repo_installation_man_dir}/man1"
+	mkdir -p "${git_filter_repo_installation_html_dir}"
+	mkdir -p "${git_filter_repo_installation_python_dir}"
+	:
+	$(MAKE) -C external/git-filter-repo install \
+		prefix='${git_filter_repo_installation_dir}' \
+		bindir='${git_filter_repo_installation_bin_dir}' \
+		mandir='${git_filter_repo_installation_man_dir}' \
+		htmldir='${git_filter_repo_installation_html_dir}' \
+		pythondir='${git_filter_repo_installation_python_dir}' \
+		;
+	@:
+	@$(call touch_file,$@)
+
